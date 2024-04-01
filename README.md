@@ -1,2 +1,2 @@
 # LeetCode
-Leetcode Question Naswer
+Leetcode Question Answer
