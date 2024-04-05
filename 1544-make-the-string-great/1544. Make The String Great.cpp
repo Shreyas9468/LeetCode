@@ -1,40 +1,22 @@
 class Solution {
 public:
-    string makeGood(string s) {
-       int n = s.length(); 
-       if(s=="SAYTTveEVttyaswmMwnNCMmcnNWmMWhIgZyWnFirRIfNwYzGiHhH"){
-        return "";
-       }
-       if(s=="nFgxdfzNnZFDXGfNfyZpnNPzYFAUCSsEckKCeSscuaFRrtCWwcTRrfqQJjbtTBAHhasfOoFSdDcZgGzCF")
-       return "F";
-       string ans = "";
-       bool over = false; 
-       while(!over){
-         ans = "";
-         int n = s.length();
-         bool op = false;
-         for(int i = 0; i < n - 1;){ 
-            if(abs(s[i] - s[i + 1]) == 32){
-                i += 2;
-                op = true;
+    string makeGood(std::string s) {
+        stack<char> stack;
+        
+        for (char c : s) {
+            if (!stack.empty() && std::abs(c - stack.top()) == 32) {
+                stack.pop();
+            } else {
+                stack.push(c);
             }
-            else{
-                ans.push_back(s[i]);
-                i++;
-            }
-         }
-         if(n >= 2 && abs(s[n - 2] - s[n - 1]) != 32){ // Added 
-            ans.push_back(s[n - 1]);
-         }
-         
-         
-         if(!op){
-            over = true;
-         }
-         else{
-            s = ans;
-         }
-       } 
-       return s;
+        }
+        
+        string result;
+        while (!stack.empty()) {
+            result = stack.top() + result;
+            stack.pop();
+        }
+        
+        return result;
     }
 };
