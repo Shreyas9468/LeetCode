@@ -21,7 +21,14 @@ public:
             maxrightheight = max(maxrightheight, height[i]);
             right[i] = maxrightheight;
         }
-        
+        for(auto it : left){
+            cout<<it<<" ";
+        }
+        cout<<endl;
+        for(auto it : right){
+            cout<<it<<" ";
+        }
+        cout<<endl;
         // Calculate the total trapped water.
         int watertrapped = 0;
         for (int i = 0; i < n; i++) {
