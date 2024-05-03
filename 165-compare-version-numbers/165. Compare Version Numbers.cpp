@@ -3,15 +3,15 @@ public:
     int compareVersion(string version1, string version2) {
         string num1="";
         string num2 = "";
-        vector<long long int>v1;
-        vector<long long int>v2;
+        vector<int>v1;
+        vector< int>v2;
 
         for(auto it :version1 ){
             if(it!='.'){
                 num1.push_back(it);
             }
             else{
-                v1.push_back(stol(num1));
+                v1.push_back(stoi(num1));
                 num1="";
             }
         }
@@ -22,7 +22,7 @@ public:
                 num2.push_back(it);
             }
             else{
-                v2.push_back(stol(num2));
+                v2.push_back(stoi(num2));
                 num2="";
             }
         }
