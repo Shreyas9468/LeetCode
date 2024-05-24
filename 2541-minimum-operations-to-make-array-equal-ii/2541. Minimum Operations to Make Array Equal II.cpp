@@ -1,5 +1,10 @@
 class Solution {
 public:
+ Solution() {
+        std::ios_base::sync_with_stdio(false);
+        std::cin.tie(NULL);
+        std::cout.tie(NULL);
+    }
     long long minOperations(vector<int>& nums1, vector<int>& nums2, int k) {
         if(k==0){
             for(int  i = 0;i<nums1.size();i++){
