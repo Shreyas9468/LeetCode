@@ -1,0 +1,11 @@
+WITH helper AS
+(
+    SELECT *,
+        id - ROW_NUMBER() OVER (PARTITION BY people >= 100 ORDER BY id) n
+    FROM Stadium
+)
+SELECT id, visit_date, people FROM helper
+JOIN (SELECT COUNT(*) cnt, n FROM helper
+GROUP BY people >= 100, n) T USING(n)
+WHERE cnt > 2 AND people > 99
+ORDER BY id
