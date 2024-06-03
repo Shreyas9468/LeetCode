@@ -1,40 +1,28 @@
 class Solution {
 public:
-    vector<int> nextGreaterElements(vector<int>& nums) {
-        vector<int>v;
-        for(int i=0;i<nums.size();i++)
-        {
-            int check=0;
-            int j;
-            if(i==nums.size()-1)
-            {
-                j=0;
-            }
-            else j=i+1;
-            for(;(j<nums.size());j++)
-            {
+    vector<int> nextGreaterElements(vector<int>& a) {
+        int n = a.size();
+        vector<int>v(n,-1);
 
-                  if(nums[j]>nums[i])
-                  {
-                    v.push_back(nums[j]);check=1;break;
-                  }
-                  if(j==nums.size()-1)
-                  {
-                   
-                  if(i==j) break;
-                   j=0;
-                     if(nums[j]>nums[i])
-                  {
-                    v.push_back(nums[j]);check=1;break;
-                  }
-                 // if(check) break;
-                  }
-                if(j==i) break;
+        stack<int>st;
+        for(int i = 2*n - 1; i >= 0; i--)
+        {
+            // we pop out all elements smaller than current element
+            while(!st.empty() && (a[i%n] >= st.top()))
+            {
+                st.pop();
             }
-            if(check) continue;
-            else {
-                v.push_back(-1);}
+
+            // if stack is empty means no greater element is there
+            // if not empty we make answer at that index equal to top element
+            if(!st.empty() && (i < n))
+            {
+                v[i] = st.top();
+            }
+
+            st.push(a[i%n]);
         }
+
         return v;
     }
 };
