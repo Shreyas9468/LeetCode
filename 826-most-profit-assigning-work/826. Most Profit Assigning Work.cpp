@@ -1,6 +1,9 @@
 class Solution {
 public:
-
+    Solution(){
+ios::sync_with_stdio(0);
+cout.tie(0);
+cin.tie(0);}
     int bs(vector<pair<int,int>>&vp ,int val){
         int s = 0;
         int e = vp.size()-1;
