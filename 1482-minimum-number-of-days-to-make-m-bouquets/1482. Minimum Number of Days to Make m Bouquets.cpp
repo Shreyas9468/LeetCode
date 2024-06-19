@@ -35,6 +35,8 @@ public:
     }
 
     int minDays(vector<int>& b, int m, int k) {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
         int mind = INT_MAX;
         int maxd = INT_MIN;
         if (b.size() < (m*1ll * k*1ll))
