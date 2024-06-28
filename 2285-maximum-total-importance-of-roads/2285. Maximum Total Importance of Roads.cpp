@@ -2,6 +2,9 @@ class Solution {
 public:
     long long maximumImportance(int n, vector<vector<int>>& r) {
         //
+        ios::sync_with_stdio(false);
+        cin.tie(nullptr);
+        cout.tie(nullptr);
         vector<int>v(n,0);
         for(auto it :r ){
             v[it[0]]++;
