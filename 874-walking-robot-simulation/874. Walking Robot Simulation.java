@@ -1,33 +1,47 @@
 import java.util.HashSet;
 import java.util.Set;
 
-class Solution {
+public class Solution {
     public int robotSim(int[] commands, int[][] obstacles) {
-        int x=0,y=0,d=0;
-        int[][] direction={{0,1},{1,0},{0,-1},{-1,0}};
-        int maxDistance=0;
-        Set<String> obstacleSet=new HashSet<>();
-        for(int[] obstacle:obstacles){
-            obstacleSet.add(obstacle[0]+","+obstacle[1]);
+        // Directions array: (north, east, south, west)
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int x = 0, y = 0; // Robot starts at (0, 0)
+        int dir = 0; // Start facing north
+        int maxDistSquared = 0;
+
+        // Use a set to store the obstacles
+        Set<String> obstacleSet = new HashSet<>();
+        for (int[] obstacle : obstacles) {
+            obstacleSet.add(obstacle[0] + "," + obstacle[1]);
         }
-        for(int cmd:commands){
-            if(cmd==-1){
-                d=(d+1)%4;
-            }else if(cmd==-2){
-                d=(d+3)%4;
-            }else{
-                for(int i=0;i<cmd;i++){
-                    int nx=x+direction[d][0];
-                    int ny=y+direction[d][1];
-                    if(obstacleSet.contains(nx+","+ny)){
+
+        for (int command : commands) {
+            if (command == -1) {
+                // Turn right
+                dir = (dir + 1) % 4;
+            } else if (command == -2) {
+                // Turn left
+                dir = (dir + 3) % 4;
+            } else {
+                // Move forward
+                for (int i = 0; i < command; i++) {
+                    int nextX = x + directions[dir][0];
+                    int nextY = y + directions[dir][1];
+
+                    if (!obstacleSet.contains(nextX + "," + nextY)) {
+                        x = nextX;
+                        y = nextY;
+                        maxDistSquared = Math.max(maxDistSquared, x * x + y * y);
+                    } else {
+                        // Stop moving if an obstacle is encountered
                         break;
                     }
-                    x=nx;
-                    y=ny;
-                    maxDistance=Math.max(maxDistance,x*x+y*y);
                 }
             }
         }
-        return maxDistance;
+
+        return maxDistSquared;
     }
+
+
 }
